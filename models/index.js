@@ -1,18 +1,19 @@
+const Student = require("./Student");
+const Course = require("./Course");
+const StudentCourse = require("./StudentCourse");
 
-const User = require("./User");
-const Post = require("./Post");
-
-// One User can have many Posts
-User.hasMany(Post, {
-  foreignKey: "userId",
+Student.belongsToMany(Course, {
+  through: StudentCourse,
+  foreignKey: "studentId",
 });
 
-// Each Post belongs to one User
-Post.belongsTo(User, {
-  foreignKey: "userId",
+Course.belongsToMany(Student, {
+  through: StudentCourse,
+  foreignKey: "courseId",
 });
 
 module.exports = {
-  User,
-  Post,
+  Student,
+  Course,
+  StudentCourse,
 };
